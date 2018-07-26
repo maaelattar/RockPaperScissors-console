@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ROCK PAPER SCISSORS</title>
+</head>
+
+<body>
+	<script>
+		'use strict';
+		let computerScore = 0;
+		let playerScore = 0;
+
+		function computerPlay() {
+			let selection = ['rock', 'paper', 'scissors'];
+			let randomInt = Math.floor(Math.random() * 3);
+			return selection[randomInt];
+		}
+
+		function playerPlay() {
+			let selection = '';
+			while (selection.toLowerCase() != 'rock' &&
+				selection.toLowerCase() != 'paper' &&
+				selection.toLowerCase() != 'scissors') {
+				selection = prompt("Play a rock or paper or scissors");
+			}
+			return selection;
+		}
+
+		function playRound(playerSelection, computerSelection) {
+			if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+				return 'Tie! there is no winner for this round';
+			}
+			if (playerSelection.toLowerCase() === 'rock') {
+				if (computerSelection.toLowerCase() === 'scissors') {
+					playerScore++;
+					return `You win this round! ${playerSelection} beats ${computerSelection}`;
+
+				}
+
+				if (computerSelection.toLowerCase() === 'paper') {
+					computerScore++;
+					return `You lose this round! ${computerSelection} beats ${playerSelection}`;
+
+				}
+
+			}
+
+			if (playerSelection.toLowerCase() === 'paper') {
+				if (computerSelection.toLowerCase() === 'rock') {
+					playerScore++;
+					return `You win this round! ${playerSelection} beats ${computerSelection}`;
+
+				}
+
+				if (computerSelection.toLowerCase() === 'scissors') {
+					computerScore++;
+					return `You lose this round! ${computerSelection} beats ${playerSelection}`;
+
+				}
+
+			}
+
+			if (playerSelection.toLowerCase() === 'scissors') {
+				if (computerSelection.toLowerCase() === 'paper') {
+					playerScore++;
+					return `You win this round! ${playerSelection} beats ${computerSelection}`;
+
+				}
+
+				if (computerSelection.toLowerCase() === 'rock') {
+					computerScore++;
+					return `You lose this round! ${computerSelection} beats ${playerSelection}`;
+
+				}
+
+			}
+
+		}
+
+		function getWinner() {
+			if (playerScore > computerScore) {
+				return `Congratulations You have won, Your score is ${playerScore} and computer score is ${computerScore}`;
+			} else if (playerScore < computerScore) {
+				return `computer has won, Computer score is ${computerScore} and your score is ${playerScore}`;
+			} else {
+				return `There is no winner, Computer score is ${computerScore} and your score is ${playerScore}`;
+			}
+		}
+
+		function game() {
+			for (let i = 0; i < 5; i++) {
+
+				let computerSelection = computerPlay();
+				let playerSelection = playerPlay();
+
+				let roundResult = playRound(playerSelection, computerSelection);
+				console.log(roundResult);
+			}
+			let finalResult = getWinner();
+			console.log(finalResult);
+		}
+
+		game();
+	</script>
+</body>
+
+</html>
